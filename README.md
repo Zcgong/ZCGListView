@@ -15,15 +15,16 @@
 @property (nonatomic, strong) UIView* rightHeadView;//右侧表头
 @property (nonatomic, strong) UITableView* leftContentTableView;//左侧Tableview
 @property (nonatomic, strong) UITableView* rightContentTableView;//右侧Tableview
-
+//列宽 
 @property (nonatomic, assign) CGFloat rightColumnWidth;//右侧列宽
 @property (nonatomic, assign) CGFloat leftColumnWidth;//左侧列宽
-@property (nonatomic, assign) CGFloat headerViewheight;//表头高度
 
+@property (nonatomic, assign) CGFloat headerViewheight;//表头高度
+//字体大小
 @property (nonatomic, assign) CGFloat leftFontSize;//左侧列表字体大小
 @property (nonatomic, assign) CGFloat rightFontSize;//右侧列表字体大小
 @property (nonatomic, assign) CGFloat headerFontSize;//表头字体大小
-
+//文字颜色
 @property (nonatomic, strong) UIColor *headerTextColor;//表头文字颜色
 @property (nonatomic, strong) UIColor *leftTextColor;//左侧列表文字颜色
 @property (nonatomic, strong) UIColor *rightTextColor;//右侧列表文字颜色

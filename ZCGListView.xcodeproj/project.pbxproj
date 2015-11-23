@@ -18,6 +18,7 @@
 		0396D5C11C00507B00E31F69 /* ZCGLeftContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5BC1C00507B00E31F69 /* ZCGLeftContentTableViewCell.m */; };
 		0396D5C21C00507B00E31F69 /* ZCGListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5BE1C00507B00E31F69 /* ZCGListView.m */; };
 		0396D5C31C00507B00E31F69 /* ZCGRightContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5C01C00507B00E31F69 /* ZCGRightContentTableViewCell.m */; };
+		0396D5CE1C02DD8000E31F69 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5CD1C02DD8000E31F69 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		0396D5BE1C00507B00E31F69 /* ZCGListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCGListView.m; sourceTree = "<group>"; };
 		0396D5BF1C00507B00E31F69 /* ZCGRightContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCGRightContentTableViewCell.h; sourceTree = "<group>"; };
 		0396D5C01C00507B00E31F69 /* ZCGRightContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCGRightContentTableViewCell.m; sourceTree = "<group>"; };
+		0396D5CD1C02DD8000E31F69 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		036C83841BFB0E0B00E56854 /* ZCGListView */ = {
 			isa = PBXGroup;
 			children = (
+				0396D5CD1C02DD8000E31F69 /* README.md */,
 				0396D5BA1C00503B00E31F69 /* ZCGListViewClass */,
 				036C83881BFB0E0B00E56854 /* AppDelegate.h */,
 				036C83891BFB0E0B00E56854 /* AppDelegate.m */,
@@ -296,6 +299,7 @@
 				036C838D1BFB0E0B00E56854 /* ViewController.m in Sources */,
 				0396D5C11C00507B00E31F69 /* ZCGLeftContentTableViewCell.m in Sources */,
 				036C838A1BFB0E0B00E56854 /* AppDelegate.m in Sources */,
+				0396D5CE1C02DD8000E31F69 /* README.md in Sources */,
 				036C83871BFB0E0B00E56854 /* main.m in Sources */,
 				0396D5C21C00507B00E31F69 /* ZCGListView.m in Sources */,
 				0396D5C31C00507B00E31F69 /* ZCGRightContentTableViewCell.m in Sources */,
