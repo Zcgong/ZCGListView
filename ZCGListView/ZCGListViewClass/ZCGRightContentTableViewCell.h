@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZCGEnumClass.h"
 
 @interface ZCGRightContentTableViewCell : UITableViewCell
 @property (nonatomic, assign) NSInteger columns;
 @property (nonatomic, assign) CGFloat columnWidth;
 @property (nonatomic, strong)  NSArray* rowData;
-
+@property (nonatomic, assign) ZCGListViewSeparateLineStyle separateLineStyle;
 - (instancetype)initWithColumnWidth:(CGFloat)columnWidth Style:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier rowData:(NSArray*)data;
 
 - (void)setCellSeparatLineWidth:(CGFloat)width Color:(UIColor*)color;

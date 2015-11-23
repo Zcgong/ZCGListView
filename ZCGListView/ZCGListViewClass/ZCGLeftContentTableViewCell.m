@@ -8,37 +8,88 @@
 
 #import "ZCGLeftContentTableViewCell.h"
 
+#define WIDTH  self.frame.size.width
+#define HEIGHT self.frame.size.height
+#define DefaultSeparateColor [UIColor blackColor]
 @implementation ZCGLeftContentTableViewCell
 {
-    BOOL taped;
+    UIView* separateLineView;
+    
 }
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+
+- (instancetype)initWithListCellStyle:(ZCGLeftContentCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    
+    self =  [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.cellStyle = style;
+        switch (style) {
+            case ZCGLeftContentCellStyleSubtitle:{
+                self.nameLabel = [[UILabel alloc]init];
+                self.subTitleLabel = [[UILabel alloc]init];
+                [self.contentView addSubview:self.nameLabel];
+                [self.contentView addSubview:self.subTitleLabel];
+            }
+                break;
+                
+            default:
+                break;
+        }
         self.nameLabel = [[UILabel alloc]init];
         [self.contentView addSubview:self.nameLabel];
+        separateLineView = [[UIView alloc]init];
+        [self.contentView addSubview:separateLineView];
+        
     }
     return self;
+    
 }
 
 - (void)layoutSubviews{
+    
     [super layoutSubviews];
-    self.nameLabel.frame = CGRectMake(0, 0,self.frame.size.width, self.frame.size.height);
-    self.nameLabel.userInteractionEnabled = YES;
+    
+    if (self.cellStyle == ZCGLeftContentCellStyleSubtitle) {
+        self.nameLabel.frame = CGRectMake(0, 0,WIDTH, HEIGHT/2);
+        self.subTitleLabel.frame = CGRectMake(0, HEIGHT/2, WIDTH, HEIGHT/2);
+    }else{
+        self.nameLabel.frame = CGRectMake(0, 0,WIDTH, HEIGHT);
+    }
+    if (self.separateLineStyle == ZCGListViewSeparateLineStyleSingleLine) {
+        separateLineView.frame = CGRectMake(0, HEIGHT-0.5, WIDTH, 0.5);
+        separateLineView.backgroundColor = [UIColor redColor];
+    }
+    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    
     [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-    UIView* bgView = [[UIView alloc]init];
-    bgView.backgroundColor = [UIColor clearColor];
-    self.selectedBackgroundView = bgView;
+//    UIView* bgView = [[UIView alloc]init];
+//    bgView.backgroundColor = [UIColor clearColor];
+//    self.selectedBackgroundView = bgView;
+    
 }
 - (void)setCellSeparatLineWidth:(CGFloat)width Color:(UIColor*)color {
     
+    if (self.separateLineStyle == ZCGListViewSeparateLineStyleSingleLine) {
+        separateLineView.backgroundColor = color;
+        CGRect frame = separateLineView.frame;
+        frame.size.height = width/2;
+        separateLineView.frame = frame;
+    }else{
+        if (self.cellStyle == ZCGLeftContentCellStyleSubtitle) {
+            self.subTitleLabel.layer.borderWidth = width/2;
+            self.subTitleLabel.layer.borderColor = color.CGColor;
+        }
         self.nameLabel.layer.borderWidth = width/2;
         self.nameLabel.layer.borderColor = color.CGColor;
+    }
+    
 }
 - (void)changeColumnColorWithColor:(UIColor*)columnColor {
+    
+    if (self.cellStyle == ZCGLeftContentCellStyleSubtitle) {
+        self.subTitleLabel.backgroundColor = columnColor;
+    }
     self.nameLabel.backgroundColor = columnColor;
 }
 

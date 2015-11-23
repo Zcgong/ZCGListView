@@ -1,12 +1,20 @@
 # ZCGListView
+
 ##简介
+
 这是一个表格控件，通过两个TableviewView和两个ScrollView加Label实现。
+
 ##功能
-1.根据需要设置行高，列宽
-2.根据需要设置每一行的字体大小，颜色，背景色
-3.根据需要设置整体的背景颜色
+1. 根据需要设置行高，列宽
+2. 根据需要设置每一行的字体大小，颜色，背景色
+3. 根据需要设置整体的背景颜色
+4. 根据需要设置分隔线颜色和宽度
+5. 首列固定 
+
 ##使用
+
 #####属性和方法
+
 <pre><code>
 @property (nonatomic, strong) NSMutableArray *listData;//数据
 @property (nonatomic, weak) id<ZCGListViewDelegate> delegate;
@@ -50,6 +58,7 @@
 - (void)listViewRightCell:(ZCGRightContentTableViewCell*)cell changeColumnColorWithTag:(NSInteger)tag color:(UIColor *)color;
 
 </code></pre>
+
 #####添加
 <pre><code>
     //表头数据  是表头数组
@@ -69,9 +78,12 @@
     [_listView setSeparateLineWidth:1 Color:[UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0]]
     [self.view addSubview:_listView];
 </code></pre>
+
 #####协议方法——这些方法为可选方法
+
 1. -(void)listView:(ZCGListView*)listView didSelectCellAtIndexPath:(NSIndexPath*)indexPath;
 2. -(CGFloat)listView:(ZCGListView*)listView heightForRowIndexPath:(NSIndexPath *)indexPath;
 
 ##改进
+
 需要进一步封装，实现单元格中View的自定义

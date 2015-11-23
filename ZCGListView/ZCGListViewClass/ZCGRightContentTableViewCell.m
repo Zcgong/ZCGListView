@@ -7,6 +7,12 @@
 //
 
 #import "ZCGRightContentTableViewCell.h"
+
+#define WIDTH  self.frame.size.width
+#define HEIGHT self.frame.size.height
+#define DefaultSeparateColor [UIColor blackColor]
+
+
 @interface ZCGRightContentTableViewCell()
 
 @end
@@ -14,6 +20,7 @@
 {
     NSMutableArray* columnLabels;
     NSInteger tapCount;
+    UIView* separateLineView;
 }
 
 - (instancetype)initWithColumnWidth:(CGFloat)columnWidth Style:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier rowData:(NSArray*)data{
@@ -32,37 +39,55 @@
     if (_columns == 0) {
         return;
     }
+    if (self.separateLineStyle == ZCGListViewSeparateLineStyleSingleLine) {
+        separateLineView = [[UIView alloc]init];
+        [self.contentView addSubview:separateLineView];
+    }
+    
     for (int idx = 0; idx < _columns; idx ++) {
         UILabel* label = [[UILabel alloc]init];
         label.tag = 500+idx;
         [columnLabels addObject:label];
         [self.contentView addSubview:label];
     }
+    
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
     
     for (NSInteger idx = 0; idx < _columns; idx ++) {
         UILabel* label = columnLabels[idx];
-        label.frame = CGRectMake(_columnWidth*idx, 0, _columnWidth, self.frame.size.height);
+        label.frame = CGRectMake(_columnWidth*idx, 0, _columnWidth, HEIGHT-0.5);
         label.numberOfLines = 0;
         label.text = self.rowData[idx];
         
     }
+    if (self.separateLineStyle == ZCGListViewSeparateLineStyleSingleLine) {
+        separateLineView.backgroundColor = [UIColor redColor];
+        separateLineView.frame = CGRectMake(0, HEIGHT-0.5, WIDTH, 0.5);
+    }
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
-    UIView* bgView = [[UIView alloc]init];
-    bgView.backgroundColor = [UIColor clearColor];
-    self.selectedBackgroundView = bgView;
+//    UIView* bgView = [[UIView alloc]init];
+//    bgView.backgroundColor = [UIColor clearColor];
+//    self.selectedBackgroundView = bgView;
 }
 - (void)setCellSeparatLineWidth:(CGFloat)width Color:(UIColor*)color {
-    for (UILabel* label  in columnLabels) {
-        label.layer.borderWidth = width/2;
-        label.layer.borderColor = color.CGColor;
+    if (self.separateLineStyle == ZCGListViewSeparateLineStyleSingleLine) {
+        separateLineView.backgroundColor = color;
+        CGRect frame = separateLineView.frame;
+        frame.size.height = width/2;
+        separateLineView.frame = frame;
+    }else{
+        for (UILabel* label  in columnLabels) {
+            label.layer.borderWidth = width/2;
+            label.layer.borderColor = color.CGColor;
+        }
     }
 }
 - (void)setCellTextAlignment:(NSTextAlignment)align {

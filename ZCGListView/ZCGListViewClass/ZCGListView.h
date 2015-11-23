@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZCGEnumClass.h"
 @class ZCGListView;
 @class ZCGRightContentTableViewCell;
 @protocol ZCGListViewDelegate <NSObject>
@@ -53,6 +53,8 @@
 @property (nonatomic, strong) UIColor *viewBgColor;
 
 @property (nonatomic, assign) UITableViewCellSelectionStyle cellSelectionStyle;
+@property (nonatomic, assign) ZCGListViewSeparateLineStyle separateLineStyle;
+
 
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data;
 

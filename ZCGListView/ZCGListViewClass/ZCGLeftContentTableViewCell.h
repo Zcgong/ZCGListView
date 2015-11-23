@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZCGEnumClass.h"
 @interface ZCGLeftContentTableViewCell : UITableViewCell
 @property (strong, nonatomic) UILabel *nameLabel;
+@property (strong, nonatomic) UILabel *subTitleLabel;
+@property (nonatomic, assign) ZCGLeftContentCellStyle cellStyle;
+@property (nonatomic, assign) ZCGListViewSeparateLineStyle separateLineStyle;
+
+- (instancetype)initWithListCellStyle:(ZCGLeftContentCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setCellSeparatLineWidth:(CGFloat)width Color:(UIColor*)color;
 - (void)changeColumnColorWithColor:(UIColor*)columnColor;
 @end
