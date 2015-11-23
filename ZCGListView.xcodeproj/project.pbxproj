@@ -13,12 +13,10 @@
 		036C83901BFB0E0B00E56854 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C838E1BFB0E0B00E56854 /* Main.storyboard */; };
 		036C83921BFB0E0B00E56854 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036C83911BFB0E0B00E56854 /* Assets.xcassets */; };
 		036C83951BFB0E0B00E56854 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C83931BFB0E0B00E56854 /* LaunchScreen.storyboard */; };
-		036C83A01BFB0E0B00E56854 /* ZCGListViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C839F1BFB0E0B00E56854 /* ZCGListViewTests.m */; };
-		036C83AB1BFB0E0B00E56854 /* ZCGListViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C83AA1BFB0E0B00E56854 /* ZCGListViewUITests.m */; };
-		0396D5C11C00507B00E31F69 /* ZCGLeftContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5BC1C00507B00E31F69 /* ZCGLeftContentTableViewCell.m */; };
-		0396D5C21C00507B00E31F69 /* ZCGListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5BE1C00507B00E31F69 /* ZCGListView.m */; };
-		0396D5C31C00507B00E31F69 /* ZCGRightContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5C01C00507B00E31F69 /* ZCGRightContentTableViewCell.m */; };
 		0396D5CE1C02DD8000E31F69 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0396D5CD1C02DD8000E31F69 /* README.md */; };
+		03AFEA651C03193700D68E67 /* ZCGLeftContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AFEA601C03193700D68E67 /* ZCGLeftContentTableViewCell.m */; };
+		03AFEA661C03193700D68E67 /* ZCGListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AFEA621C03193700D68E67 /* ZCGListView.m */; };
+		03AFEA671C03193700D68E67 /* ZCGRightContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AFEA641C03193700D68E67 /* ZCGRightContentTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,19 +48,15 @@
 		036C83941BFB0E0B00E56854 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		036C83961BFB0E0B00E56854 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036C839B1BFB0E0B00E56854 /* ZCGListViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZCGListViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		036C839F1BFB0E0B00E56854 /* ZCGListViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCGListViewTests.m; sourceTree = "<group>"; };
-		036C83A11BFB0E0B00E56854 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036C83A61BFB0E0B00E56854 /* ZCGListViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZCGListViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		036C83AA1BFB0E0B00E56854 /* ZCGListViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCGListViewUITests.m; sourceTree = "<group>"; };
-		036C83AC1BFB0E0B00E56854 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0396D5BB1C00507B00E31F69 /* ZCGLeftContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCGLeftContentTableViewCell.h; sourceTree = "<group>"; };
-		0396D5BC1C00507B00E31F69 /* ZCGLeftContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCGLeftContentTableViewCell.m; sourceTree = "<group>"; };
-		0396D5BD1C00507B00E31F69 /* ZCGListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCGListView.h; sourceTree = "<group>"; };
-		0396D5BE1C00507B00E31F69 /* ZCGListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCGListView.m; sourceTree = "<group>"; };
-		0396D5BF1C00507B00E31F69 /* ZCGRightContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCGRightContentTableViewCell.h; sourceTree = "<group>"; };
-		0396D5C01C00507B00E31F69 /* ZCGRightContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCGRightContentTableViewCell.m; sourceTree = "<group>"; };
 		0396D5CD1C02DD8000E31F69 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		0396D5E91C02F8B200E31F69 /* ZCGEnumClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCGEnumClass.h; sourceTree = "<group>"; };
+		03AFEA5E1C03193700D68E67 /* ZCGEnumClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCGEnumClass.h; path = ZCGListViewClass/ZCGEnumClass.h; sourceTree = SOURCE_ROOT; };
+		03AFEA5F1C03193700D68E67 /* ZCGLeftContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCGLeftContentTableViewCell.h; path = ZCGListViewClass/ZCGLeftContentTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		03AFEA601C03193700D68E67 /* ZCGLeftContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCGLeftContentTableViewCell.m; path = ZCGListViewClass/ZCGLeftContentTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		03AFEA611C03193700D68E67 /* ZCGListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCGListView.h; path = ZCGListViewClass/ZCGListView.h; sourceTree = SOURCE_ROOT; };
+		03AFEA621C03193700D68E67 /* ZCGListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCGListView.m; path = ZCGListViewClass/ZCGListView.m; sourceTree = SOURCE_ROOT; };
+		03AFEA631C03193700D68E67 /* ZCGRightContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCGRightContentTableViewCell.h; path = ZCGListViewClass/ZCGRightContentTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		03AFEA641C03193700D68E67 /* ZCGRightContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCGRightContentTableViewCell.m; path = ZCGListViewClass/ZCGRightContentTableViewCell.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +87,8 @@
 		036C83791BFB0E0B00E56854 = {
 			isa = PBXGroup;
 			children = (
-				036C83841BFB0E0B00E56854 /* ZCGListView */,
-				036C839E1BFB0E0B00E56854 /* ZCGListViewTests */,
-				036C83A91BFB0E0B00E56854 /* ZCGListViewUITests */,
+				0396D5BA1C00503B00E31F69 /* ZCGListViewClass */,
+				036C83841BFB0E0B00E56854 /* ZCGListViewExample */,
 				036C83831BFB0E0B00E56854 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,11 +103,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		036C83841BFB0E0B00E56854 /* ZCGListView */ = {
+		036C83841BFB0E0B00E56854 /* ZCGListViewExample */ = {
 			isa = PBXGroup;
 			children = (
 				0396D5CD1C02DD8000E31F69 /* README.md */,
-				0396D5BA1C00503B00E31F69 /* ZCGListViewClass */,
 				036C83881BFB0E0B00E56854 /* AppDelegate.h */,
 				036C83891BFB0E0B00E56854 /* AppDelegate.m */,
 				036C838B1BFB0E0B00E56854 /* ViewController.h */,
@@ -125,6 +117,7 @@
 				036C83961BFB0E0B00E56854 /* Info.plist */,
 				036C83851BFB0E0B00E56854 /* Supporting Files */,
 			);
+			name = ZCGListViewExample;
 			path = ZCGListView;
 			sourceTree = "<group>";
 		};
@@ -136,36 +129,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		036C839E1BFB0E0B00E56854 /* ZCGListViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				036C839F1BFB0E0B00E56854 /* ZCGListViewTests.m */,
-				036C83A11BFB0E0B00E56854 /* Info.plist */,
-			);
-			path = ZCGListViewTests;
-			sourceTree = "<group>";
-		};
-		036C83A91BFB0E0B00E56854 /* ZCGListViewUITests */ = {
-			isa = PBXGroup;
-			children = (
-				036C83AA1BFB0E0B00E56854 /* ZCGListViewUITests.m */,
-				036C83AC1BFB0E0B00E56854 /* Info.plist */,
-			);
-			path = ZCGListViewUITests;
-			sourceTree = "<group>";
-		};
 		0396D5BA1C00503B00E31F69 /* ZCGListViewClass */ = {
 			isa = PBXGroup;
 			children = (
-				0396D5E91C02F8B200E31F69 /* ZCGEnumClass.h */,
-				0396D5BD1C00507B00E31F69 /* ZCGListView.h */,
-				0396D5BE1C00507B00E31F69 /* ZCGListView.m */,
-				0396D5BB1C00507B00E31F69 /* ZCGLeftContentTableViewCell.h */,
-				0396D5BC1C00507B00E31F69 /* ZCGLeftContentTableViewCell.m */,
-				0396D5BF1C00507B00E31F69 /* ZCGRightContentTableViewCell.h */,
-				0396D5C01C00507B00E31F69 /* ZCGRightContentTableViewCell.m */,
+				03AFEA5E1C03193700D68E67 /* ZCGEnumClass.h */,
+				03AFEA5F1C03193700D68E67 /* ZCGLeftContentTableViewCell.h */,
+				03AFEA601C03193700D68E67 /* ZCGLeftContentTableViewCell.m */,
+				03AFEA611C03193700D68E67 /* ZCGListView.h */,
+				03AFEA621C03193700D68E67 /* ZCGListView.m */,
+				03AFEA631C03193700D68E67 /* ZCGRightContentTableViewCell.h */,
+				03AFEA641C03193700D68E67 /* ZCGRightContentTableViewCell.m */,
 			);
-			path = ZCGListViewClass;
+			name = ZCGListViewClass;
+			path = ZCGListView/ZCGListViewClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,12 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				036C838D1BFB0E0B00E56854 /* ViewController.m in Sources */,
-				0396D5C11C00507B00E31F69 /* ZCGLeftContentTableViewCell.m in Sources */,
+				03AFEA661C03193700D68E67 /* ZCGListView.m in Sources */,
 				036C838A1BFB0E0B00E56854 /* AppDelegate.m in Sources */,
+				03AFEA651C03193700D68E67 /* ZCGLeftContentTableViewCell.m in Sources */,
+				03AFEA671C03193700D68E67 /* ZCGRightContentTableViewCell.m in Sources */,
 				0396D5CE1C02DD8000E31F69 /* README.md in Sources */,
 				036C83871BFB0E0B00E56854 /* main.m in Sources */,
-				0396D5C21C00507B00E31F69 /* ZCGListView.m in Sources */,
-				0396D5C31C00507B00E31F69 /* ZCGRightContentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +288,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036C83A01BFB0E0B00E56854 /* ZCGListViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +295,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036C83AB1BFB0E0B00E56854 /* ZCGListViewUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

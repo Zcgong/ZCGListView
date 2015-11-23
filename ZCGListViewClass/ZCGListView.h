@@ -54,7 +54,7 @@
 
 @property (nonatomic, assign) UITableViewCellSelectionStyle cellSelectionStyle;
 @property (nonatomic, assign) ZCGListViewSeparateLineStyle separateLineStyle;
-
+@property (nonatomic, assign) ZCGLeftContentCellStyle leftCellStyle;
 
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data;
 

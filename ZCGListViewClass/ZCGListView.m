@@ -128,7 +128,7 @@ static NSString* identifierR = @"rightCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray* obj = self.listData[indexPath.row];
     if ([tableView isEqual:self.leftContentTableView]) {
-        ZCGLeftContentTableViewCell* cell = [[ZCGLeftContentTableViewCell alloc]initWithListCellStyle:ZCGLeftContentCellStyleSubtitle
+        ZCGLeftContentTableViewCell* cell = [[ZCGLeftContentTableViewCell alloc]initWithListCellStyle:self.leftCellStyle?self.leftCellStyle:ZCGLeftContentCellStyleDefault
                                                                                       reuseIdentifier:identifierL];
         cell.nameLabel.text = obj.firstObject[0];
         cell.subTitleLabel.text = obj.firstObject[1];
