@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *rightHeaderLabels;
 @property (nonatomic, strong) NSMutableArray *titleArr;
 @property (nonatomic, strong) UIScrollView* rightAllContentScrollView;
+@property (nonatomic, strong) UIScrollView *mainScrollview;
 @property (nonatomic, assign) NSInteger columns;
 @end
 
@@ -36,7 +37,6 @@
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data{
     self = [super initWithFrame:frame];
     if (self) {
-        
         _titleArr = [NSMutableArray arrayWithArray:titles];
         _listData = [NSMutableArray arrayWithArray:data];
         _rightHeaderLabels = [NSMutableArray new];
@@ -47,14 +47,7 @@
 }
 
 - (void) initUI{
-    self.leftHeadView = [[UIView alloc]initWithFrame:CGRectZero];
-    self.rightHeadView = [[UIView alloc] init];
-    self.leftLabel = [[UILabel alloc]init];
-    for (int i = 0; i < _titleArr.count-1; i++) {
-        UILabel* label = [[UILabel alloc]init];
-        [_rightHeaderLabels addObject:label];
-        [self.rightHeadView addSubview:label];
-    }
+    self.mainScrollview = [[UIScrollView alloc]init];
     self.leftContentTableView = [[UITableView alloc]init];
     self.leftContentTableView.dataSource = self;
     self.leftContentTableView.delegate = self;
@@ -62,47 +55,22 @@
     self.rightContentTableView.dataSource = self;
     self.rightContentTableView.delegate = self;
     self.rightAllContentScrollView = [[UIScrollView alloc]init];
-    [self.leftHeadView addSubview:self.leftLabel];
-    [self addSubview:self.leftHeadView];
-    [self addSubview:self.leftContentTableView];
-    [self addSubview:self.rightAllContentScrollView];
+    [self.mainScrollview addSubview:self.leftContentTableView];
+    [self.mainScrollview addSubview:self.rightAllContentScrollView];
     [self.rightAllContentScrollView addSubview:self.rightContentTableView];
-    [self.rightAllContentScrollView addSubview:self.rightHeadView];
+    [self addSubview:self.mainScrollview];
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
-    //左侧表头
-    self.leftHeadView.frame = CGRectMake(0, 0, _leftColumnWidth, _headerViewheight);
-    
-    self.leftLabel.text = _titleArr.firstObject?_titleArr.firstObject:@"";
-    self.leftLabel.frame = CGRectMake(0, 0, _leftColumnWidth, _headerViewheight);
-    self.leftLabel.textAlignment = _headerTextAlign?_headerTextAlign:DefaultTextAlign;
-    self.leftLabel.font = [UIFont systemFontOfSize:_headerFontSize?_headerFontSize:DefaultFontSize];
-    self.leftLabel.backgroundColor = self.headerViewBackgroundColor ? _headerViewBackgroundColor:DefaultViewBGColor;
-    self.leftLabel.textColor = _headerTextColor ? _headerTextColor : DefaultTextColor;
-    //右侧表头
-    self.rightHeadView.frame = CGRectMake(0, 0, ContentWidth , _headerViewheight);
-    for (int i = 0 ; i < _rightHeaderLabels.count; i++ ) {
-        NSLog(@"%ld",_rightHeaderLabels.count);
-        UILabel* label = _rightHeaderLabels[i];
-        label.frame = CGRectMake(_rightColumnWidth*i, 0, _rightColumnWidth, _headerViewheight);
-        NSString* textObj = _titleArr[i+1];
-        label.text = textObj?textObj:@"";
-        label.font = [UIFont systemFontOfSize:_headerFontSize?_headerFontSize:DefaultFontSize];
-        label.textAlignment = _headerTextAlign?_headerTextAlign:DefaultTextAlign;
-        label.backgroundColor = self.headerViewBackgroundColor ? _headerViewBackgroundColor:DefaultViewBGColor;
-        label.textColor = _headerTextColor ? _headerTextColor : DefaultTextColor;
-    }
-    //左侧内容表
-    self.leftContentTableView.frame = CGRectMake(0, _headerViewheight, _leftColumnWidth, self.frame.size.height - _headerViewheight);
+        //左侧内容表
+    self.leftContentTableView.frame = CGRectMake(0, 0, _leftColumnWidth, self.frame.size.height);
     self.leftContentTableView.showsVerticalScrollIndicator = NO;
     self.leftContentTableView.showsHorizontalScrollIndicator = NO;
     self.leftContentTableView.alwaysBounceVertical = YES;
     self.leftContentTableView.separatorStyle = _cellSelectionStyle?_cellSelectionStyle:DefaultSelectStyle;
     self.leftContentTableView.backgroundColor = _viewBgColor?_viewBgColor:DefaultViewBGColor;
     //右侧内容表
-    self.rightContentTableView.frame = CGRectMake(0, _headerViewheight, ContentWidth, self.rightAllContentScrollView.frame.size.height - _headerViewheight);
+    self.rightContentTableView.frame = CGRectMake(0, 0, ContentWidth, self.rightAllContentScrollView.frame.size.height);
     self.rightContentTableView.showsHorizontalScrollIndicator = NO;
     self.rightContentTableView.showsVerticalScrollIndicator = NO;
     self.rightContentTableView.separatorStyle = _cellSelectionStyle?_cellSelectionStyle:DefaultSelectStyle;
@@ -112,9 +80,15 @@
     self.rightAllContentScrollView.frame = CGRectMake(_leftColumnWidth, 0, self.frame.size.width - _leftColumnWidth, self.frame.size.height);
     self.rightAllContentScrollView.backgroundColor = _viewBgColor?_viewBgColor:DefaultViewBGColor;
     self.rightAllContentScrollView.contentSize = CGSizeMake(ContentWidth, self.frame.size.height);
-    self.rightAllContentScrollView.bounces = NO;
+    self.rightAllContentScrollView.alwaysBounceHorizontal = _bouncesRight?_bouncesRight:YES;
+    self.rightAllContentScrollView.directionalLockEnabled = YES;
     [self headerViewBackgroundColor];
     [self tableviewFooterViewHidden];
+    
+    self.mainScrollview.frame = self.frame;
+    self.mainScrollview.contentSize = CGSizeMake(_leftColumnWidth + ContentWidth, self.frame.size.height);
+    self.mainScrollview.alwaysBounceVertical = YES;
+    
 }
 
 #pragma mark
@@ -160,8 +134,6 @@ static NSString* identifierR = @"rightCell";
         self.rightContentTableView.contentOffset = self.leftContentTableView.contentOffset;
     } else if ([scrollView isEqual:self.rightContentTableView]) {
         self.leftContentTableView.contentOffset = self.rightContentTableView.contentOffset;
-    }else if ([scrollView isEqual:self.rightAllContentScrollView]){
-        self.rightContentTableView.contentOffset = self.rightAllContentScrollView.contentOffset;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -170,6 +142,40 @@ static NSString* identifierR = @"rightCell";
     }else{
         return 45;
     }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return _headerViewheight;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([tableView isEqual:self.leftContentTableView]) {
+        self.leftHeadView = [[UIView alloc]init];
+        self.leftHeadView.frame = CGRectMake(0, 0, _leftColumnWidth, _headerViewheight);
+        self.leftLabel = [[UILabel alloc]init];
+        self.leftLabel.text = _titleArr.firstObject?_titleArr.firstObject:@"";
+        self.leftLabel.frame = CGRectMake(0, 0, _leftColumnWidth, _headerViewheight);
+        self.leftLabel.textAlignment = _headerTextAlign?_headerTextAlign:DefaultTextAlign;
+        self.leftLabel.font = [UIFont systemFontOfSize:_headerFontSize?_headerFontSize:DefaultFontSize];
+        self.leftLabel.backgroundColor = self.headerViewBackgroundColor ? _headerViewBackgroundColor:DefaultViewBGColor;
+        self.leftLabel.textColor = _headerTextColor ? _headerTextColor : DefaultTextColor;
+        [self.leftHeadView addSubview:self.leftLabel];
+        return self.leftHeadView;
+    }else if([tableView isEqual:self.rightContentTableView]){
+        self.rightHeadView = [[UIView alloc] init];
+        self.rightHeadView.frame = CGRectMake(0, 0, ContentWidth , _headerViewheight);
+        for (int i = 0; i < _titleArr.count-1; i++) {
+            UILabel* label = [[UILabel alloc]init];
+            label.frame = CGRectMake(_rightColumnWidth*i, 0, _rightColumnWidth, _headerViewheight);
+            NSString* textObj = _titleArr[i+1];
+            label.text = textObj?textObj:@"";
+            label.font = [UIFont systemFontOfSize:_headerFontSize?_headerFontSize:DefaultFontSize];
+            label.textAlignment = _headerTextAlign?_headerTextAlign:DefaultTextAlign;
+            label.backgroundColor = self.headerViewBackgroundColor ? _headerViewBackgroundColor:DefaultViewBGColor;
+            label.textColor = _headerTextColor ? _headerTextColor : DefaultTextColor;
+            [self.rightHeadView addSubview:label];
+        }
+        return self.rightHeadView;
+    }
+    return nil;
 }
 #pragma mark
 #pragma mark - Private Methods

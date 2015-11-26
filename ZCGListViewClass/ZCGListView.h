@@ -55,7 +55,7 @@
 @property (nonatomic, assign) UITableViewCellSelectionStyle cellSelectionStyle;
 @property (nonatomic, assign) ZCGListViewSeparateLineStyle separateLineStyle;
 @property (nonatomic, assign) ZCGLeftContentCellStyle leftCellStyle;
-
+@property (nonatomic, assign) BOOL bouncesRight;
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data;
 
 - (void)listViewReloadData;
