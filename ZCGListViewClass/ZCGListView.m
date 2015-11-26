@@ -83,7 +83,7 @@
     [self headerViewBackgroundColor];
     [self tableviewFooterViewHidden];
     
-    self.contentSize = CGSizeMake(_leftColumnWidth + ContentWidth, self.frame.size.height);
+    self.contentSize = self.frame.size;
     self.alwaysBounceVertical = YES;
     
 }
@@ -126,13 +126,7 @@ static NSString* identifierR = @"rightCell";
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
-    if ([scrollView isEqual:self.leftContentTableView]) {
-        self.rightContentTableView.contentOffset = self.leftContentTableView.contentOffset;
-    } else if ([scrollView isEqual:self.rightContentTableView]) {
-        self.leftContentTableView.contentOffset = self.rightContentTableView.contentOffset;
-    }
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.delegate respondsToSelector:@selector(listView:heightForRowIndexPath:)]) {
         return [self.listViewDelegate listView:self heightForRowIndexPath:indexPath];
@@ -174,6 +168,17 @@ static NSString* identifierR = @"rightCell";
     }
     return nil;
 }
+
+#pragma mark
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
+    if ([scrollView isEqual:self.leftContentTableView]) {
+        self.rightContentTableView.contentOffset = self.leftContentTableView.contentOffset;
+    } else if ([scrollView isEqual:self.rightContentTableView]) {
+        self.leftContentTableView.contentOffset = self.rightContentTableView.contentOffset;
+    }
+}
+
 #pragma mark
 #pragma mark - Private Methods
 - (void)tableviewFooterViewHidden{
