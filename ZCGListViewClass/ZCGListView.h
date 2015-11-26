@@ -21,10 +21,10 @@
 @end
 
 
-@interface ZCGListView : UIView
+@interface ZCGListView : UIScrollView
 
 @property (nonatomic, strong) NSMutableArray *listData;
-@property (nonatomic, weak) id<ZCGListViewDelegate> delegate;
+@property (nonatomic, weak) id<ZCGListViewDelegate> listViewDelegate;
 @property (nonatomic, strong) UIView* leftHeadView;
 @property (nonatomic, strong) UILabel* leftLabel;
 @property (nonatomic, strong) UIView* rightHeadView;

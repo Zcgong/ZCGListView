@@ -23,7 +23,6 @@
 @property (nonatomic, strong) NSMutableArray *rightHeaderLabels;
 @property (nonatomic, strong) NSMutableArray *titleArr;
 @property (nonatomic, strong) UIScrollView* rightAllContentScrollView;
-@property (nonatomic, strong) UIScrollView *mainScrollview;
 @property (nonatomic, assign) NSInteger columns;
 @end
 
@@ -47,7 +46,6 @@
 }
 
 - (void) initUI{
-    self.mainScrollview = [[UIScrollView alloc]init];
     self.leftContentTableView = [[UITableView alloc]init];
     self.leftContentTableView.dataSource = self;
     self.leftContentTableView.delegate = self;
@@ -55,10 +53,10 @@
     self.rightContentTableView.dataSource = self;
     self.rightContentTableView.delegate = self;
     self.rightAllContentScrollView = [[UIScrollView alloc]init];
-    [self.mainScrollview addSubview:self.leftContentTableView];
-    [self.mainScrollview addSubview:self.rightAllContentScrollView];
+    [self addSubview:self.leftContentTableView];
+    [self addSubview:self.rightAllContentScrollView];
     [self.rightAllContentScrollView addSubview:self.rightContentTableView];
-    [self addSubview:self.mainScrollview];
+  
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -85,9 +83,8 @@
     [self headerViewBackgroundColor];
     [self tableviewFooterViewHidden];
     
-    self.mainScrollview.frame = self.frame;
-    self.mainScrollview.contentSize = CGSizeMake(_leftColumnWidth + ContentWidth, self.frame.size.height);
-    self.mainScrollview.alwaysBounceVertical = YES;
+    self.contentSize = CGSizeMake(_leftColumnWidth + ContentWidth, self.frame.size.height);
+    self.alwaysBounceVertical = YES;
     
 }
 
@@ -125,7 +122,7 @@ static NSString* identifierR = @"rightCell";
         [self.leftContentTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     if ([self.delegate respondsToSelector:@selector(listView:didSelectCellAtIndexPath:)]) {
-        [self.delegate listView:self didSelectCellAtIndexPath:indexPath];
+        [self.listViewDelegate listView:self didSelectCellAtIndexPath:indexPath];
     }
 }
 
@@ -138,7 +135,7 @@ static NSString* identifierR = @"rightCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.delegate respondsToSelector:@selector(listView:heightForRowIndexPath:)]) {
-        return [self.delegate listView:self heightForRowIndexPath:indexPath];
+        return [self.listViewDelegate listView:self heightForRowIndexPath:indexPath];
     }else{
         return 45;
     }

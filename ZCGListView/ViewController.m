@@ -22,7 +22,7 @@
     _listView = [[ZCGListView alloc]initWithFrame:CGRectMake(0, 0,  self.view.frame.size.width,  self.view.frame.size.height)
                                            titles:@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"]
                                          listData:@[@[@[@"zcgong",@"000007"],@"58",@"222",@"555",@"125",@"152",@"12121"],@[@[@"zcgong",@"000007"],@"58",@"222",@"555",@"125",@"152",@"12121"],@[@[@"zcgong",@"000007"],@"58",@"222",@"555",@"125",@"152",@"12121"]]];
-    _listView.delegate = self;
+    _listView.listViewDelegate = self;
     _listView.rightColumnWidth = 150;
     _listView.leftColumnWidth = 100;
     _listView.headerViewheight = 50;
