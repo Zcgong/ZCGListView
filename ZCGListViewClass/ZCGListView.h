@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZCGEnumClass.h"
+
 @class ZCGListView;
 @class ZCGRightContentTableViewCell;
 @protocol ZCGListViewDelegate <NSObject>
@@ -20,9 +21,8 @@
 
 @end
 
-
 @interface ZCGListView : UIScrollView
-
+@property (nonatomic, strong) NSMutableArray *titleArr;
 @property (nonatomic, strong) NSMutableArray *listData;
 @property (nonatomic, weak) id<ZCGListViewDelegate> listViewDelegate;
 @property (nonatomic, strong) UIView* leftHeadView;
@@ -30,6 +30,8 @@
 @property (nonatomic, strong) UIView* rightHeadView;
 @property (nonatomic, strong) UITableView* leftContentTableView;
 @property (nonatomic, strong) UITableView* rightContentTableView;
+
+@property (nonatomic, assign) NSInteger numberOfRightLines;
 
 @property (nonatomic, assign) CGFloat rightColumnWidth;
 @property (nonatomic, assign) CGFloat leftColumnWidth;
@@ -56,6 +58,8 @@
 @property (nonatomic, assign) ZCGListViewSeparateLineStyle separateLineStyle;
 @property (nonatomic, assign) ZCGLeftContentCellStyle leftCellStyle;
 @property (nonatomic, assign) BOOL bouncesRight;
+
+
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data;
 
 - (void)listViewReloadData;

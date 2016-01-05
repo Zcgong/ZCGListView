@@ -10,6 +10,8 @@
 #import "ZCGLeftContentTableViewCell.h"
 #import "ZCGRightContentTableViewCell.h"
 
+
+
 #define ContentWidth (_rightColumnWidth*_columns)
 #define DefaultFontSize 21
 #define DefaultTextColor [UIColor blackColor]
@@ -21,8 +23,8 @@
 @interface ZCGListView()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *rightHeaderLabels;
-@property (nonatomic, strong) NSMutableArray *titleArr;
 @property (nonatomic, strong) UIScrollView* rightAllContentScrollView;
+@property (nonatomic, strong) UIScrollView* leftAllContentScrollView;
 @property (nonatomic, assign) NSInteger columns;
 @end
 
@@ -33,6 +35,15 @@
     NSInteger cellTag;
     UIColor* tagCellBgColor;
 }
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _rightHeaderLabels = [NSMutableArray new];
+        self.columns = self.titleArr.count - 1;
+        [self initUI];
+    }
+    return self;
+}
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data{
     self = [super initWithFrame:frame];
     if (self) {
@@ -40,6 +51,7 @@
         _listData = [NSMutableArray arrayWithArray:data];
         _rightHeaderLabels = [NSMutableArray new];
         self.columns = titles.count - 1;
+        
         [self initUI];
     }
     return self;
@@ -53,18 +65,20 @@
     self.rightContentTableView.dataSource = self;
     self.rightContentTableView.delegate = self;
     self.rightAllContentScrollView = [[UIScrollView alloc]init];
-    [self addSubview:self.leftContentTableView];
+    self.leftAllContentScrollView = [[UIScrollView alloc]init];
+    
+    [self addSubview:self.leftAllContentScrollView];
     [self addSubview:self.rightAllContentScrollView];
+    
     [self.rightAllContentScrollView addSubview:self.rightContentTableView];
-  
+    [self.leftAllContentScrollView addSubview:self.leftContentTableView];
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-        //左侧内容表
+    //左侧内容表
     self.leftContentTableView.frame = CGRectMake(0, 0, _leftColumnWidth, self.frame.size.height);
     self.leftContentTableView.showsVerticalScrollIndicator = NO;
     self.leftContentTableView.showsHorizontalScrollIndicator = NO;
-    self.leftContentTableView.alwaysBounceVertical = YES;
     self.leftContentTableView.separatorStyle = _cellSelectionStyle?_cellSelectionStyle:DefaultSelectStyle;
     self.leftContentTableView.backgroundColor = _viewBgColor?_viewBgColor:DefaultViewBGColor;
     //右侧内容表
@@ -73,19 +87,25 @@
     self.rightContentTableView.showsVerticalScrollIndicator = NO;
     self.rightContentTableView.separatorStyle = _cellSelectionStyle?_cellSelectionStyle:DefaultSelectStyle;
     self.rightContentTableView.backgroundColor = _viewBgColor?_viewBgColor:DefaultViewBGColor;
-    self.rightContentTableView.alwaysBounceVertical = YES;
     //右侧滚动视图
     self.rightAllContentScrollView.frame = CGRectMake(_leftColumnWidth, 0, self.frame.size.width - _leftColumnWidth, self.frame.size.height);
     self.rightAllContentScrollView.backgroundColor = _viewBgColor?_viewBgColor:DefaultViewBGColor;
     self.rightAllContentScrollView.contentSize = CGSizeMake(ContentWidth, self.frame.size.height);
     self.rightAllContentScrollView.alwaysBounceHorizontal = _bouncesRight?_bouncesRight:YES;
     self.rightAllContentScrollView.directionalLockEnabled = YES;
+    self.rightAllContentScrollView.delegate = self;
+    
+    self.leftAllContentScrollView.frame = CGRectMake(0, 0, _leftColumnWidth, self.frame.size.height);
+    self.leftAllContentScrollView.backgroundColor = _viewBgColor?_viewBgColor:DefaultViewBGColor;
+    self.leftAllContentScrollView.contentSize = CGSizeMake(_leftColumnWidth, self.frame.size.height);
+    self.leftAllContentScrollView.alwaysBounceHorizontal = NO;
+    self.leftAllContentScrollView.directionalLockEnabled = YES;
+    self.leftAllContentScrollView.delegate = self;
     [self headerViewBackgroundColor];
     [self tableviewFooterViewHidden];
     
     self.contentSize = self.frame.size;
     self.alwaysBounceVertical = YES;
-    
 }
 
 #pragma mark
@@ -174,9 +194,18 @@ static NSString* identifierR = @"rightCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
     if ([scrollView isEqual:self.leftContentTableView]) {
         self.rightContentTableView.contentOffset = self.leftContentTableView.contentOffset;
+        NSLog(@"leftContentTableView %f",scrollView.contentOffset.y);
     } else if ([scrollView isEqual:self.rightContentTableView]) {
         self.leftContentTableView.contentOffset = self.rightContentTableView.contentOffset;
+        NSLog(@"rightContentTableView %f",scrollView.contentOffset.y);
+    } else if ([scrollView isEqual:self.rightAllContentScrollView]){
+        NSLog(@"rightAllContentScrollView %f",scrollView.contentOffset.x);
+        //!TODO 想在这里做一个渐隐的效果
+        if (scrollView.contentOffset.x > 0) {
+            
+        }
     }
+    
 }
 
 #pragma mark
@@ -200,7 +229,7 @@ static NSString* identifierR = @"rightCell";
             label.layer.borderColor = color.CGColor;
         }
     }
-       [self listViewReloadData];
+    [self listViewReloadData];
 }
 
 - (void)configeLeftCell:(ZCGLeftContentTableViewCell*)cell {
@@ -214,7 +243,6 @@ static NSString* identifierR = @"rightCell";
         cell.subTitleLabel.textColor = _leftTextColor?_leftTextColor:DefaultTextColor;
         cell.subTitleLabel.textAlignment = _leftTextAlign?_leftTextAlign:DefaultTextAlign;
         cell.subTitleLabel.backgroundColor = _leftViewBackgroundColor?_leftViewBackgroundColor:DefaultViewBGColor;
-        
     }
     cell.separateLineStyle = self.separateLineStyle?self.separateLineStyle:ZCGListViewSeparateLineStyleSingleLine;
     [cell setCellSeparatLineWidth:cellSeparateWidth?cellSeparateWidth:DefaultSeparateWidth
@@ -241,4 +269,5 @@ static NSString* identifierR = @"rightCell";
     tagCellBgColor = color;
     [self listViewReloadData];
 }
+
 @end

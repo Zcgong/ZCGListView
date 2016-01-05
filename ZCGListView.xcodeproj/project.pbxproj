@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035600AB1C3B8FBC007B956D /* ZCGRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 035600AA1C3B8FBC007B956D /* ZCGRefreshHeader.m */; };
+		035600B31C3B9F83007B956D /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 035600B21C3B9F83007B956D /* down@2x.png */; };
 		036C83871BFB0E0B00E56854 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C83861BFB0E0B00E56854 /* main.m */; };
 		036C838A1BFB0E0B00E56854 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C83891BFB0E0B00E56854 /* AppDelegate.m */; };
 		036C838D1BFB0E0B00E56854 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C838C1BFB0E0B00E56854 /* ViewController.m */; };
@@ -37,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		035600A91C3B8FBC007B956D /* ZCGRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZCGRefreshHeader.h; path = ZCGListViewClass/ZCGRefreshHeader.h; sourceTree = SOURCE_ROOT; };
+		035600AA1C3B8FBC007B956D /* ZCGRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZCGRefreshHeader.m; path = ZCGListViewClass/ZCGRefreshHeader.m; sourceTree = SOURCE_ROOT; };
+		035600B21C3B9F83007B956D /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down@2x.png"; path = "ZCGListViewClass/down@2x.png"; sourceTree = SOURCE_ROOT; };
 		036C83821BFB0E0B00E56854 /* ZCGListView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZCGListView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036C83861BFB0E0B00E56854 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		036C83881BFB0E0B00E56854 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +89,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		035600B71C3BB999007B956D /* listView */ = {
+			isa = PBXGroup;
+			children = (
+				03AFEA631C03193700D68E67 /* ZCGRightContentTableViewCell.h */,
+				03AFEA641C03193700D68E67 /* ZCGRightContentTableViewCell.m */,
+				03AFEA5F1C03193700D68E67 /* ZCGLeftContentTableViewCell.h */,
+				03AFEA601C03193700D68E67 /* ZCGLeftContentTableViewCell.m */,
+			);
+			name = listView;
+			sourceTree = "<group>";
+		};
+		035600B81C3BB9A9007B956D /* listRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				035600A91C3B8FBC007B956D /* ZCGRefreshHeader.h */,
+				035600AA1C3B8FBC007B956D /* ZCGRefreshHeader.m */,
+			);
+			name = listRefresh;
+			sourceTree = "<group>";
+		};
 		036C83791BFB0E0B00E56854 = {
 			isa = PBXGroup;
 			children = (
@@ -132,13 +157,12 @@
 		0396D5BA1C00503B00E31F69 /* ZCGListViewClass */ = {
 			isa = PBXGroup;
 			children = (
+				035600B21C3B9F83007B956D /* down@2x.png */,
 				03AFEA5E1C03193700D68E67 /* ZCGEnumClass.h */,
-				03AFEA5F1C03193700D68E67 /* ZCGLeftContentTableViewCell.h */,
-				03AFEA601C03193700D68E67 /* ZCGLeftContentTableViewCell.m */,
 				03AFEA611C03193700D68E67 /* ZCGListView.h */,
 				03AFEA621C03193700D68E67 /* ZCGListView.m */,
-				03AFEA631C03193700D68E67 /* ZCGRightContentTableViewCell.h */,
-				03AFEA641C03193700D68E67 /* ZCGRightContentTableViewCell.m */,
+				035600B71C3BB999007B956D /* listView */,
+				035600B81C3BB9A9007B956D /* listRefresh */,
 			);
 			name = ZCGListViewClass;
 			path = ZCGListView/ZCGListViewClass;
@@ -247,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035600B31C3B9F83007B956D /* down@2x.png in Resources */,
 				036C83951BFB0E0B00E56854 /* LaunchScreen.storyboard in Resources */,
 				036C83921BFB0E0B00E56854 /* Assets.xcassets in Resources */,
 				036C83901BFB0E0B00E56854 /* Main.storyboard in Resources */,
@@ -275,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				036C838D1BFB0E0B00E56854 /* ViewController.m in Sources */,
+				035600AB1C3B8FBC007B956D /* ZCGRefreshHeader.m in Sources */,
 				03AFEA661C03193700D68E67 /* ZCGListView.m in Sources */,
 				036C838A1BFB0E0B00E56854 /* AppDelegate.m in Sources */,
 				03AFEA651C03193700D68E67 /* ZCGLeftContentTableViewCell.m in Sources */,
