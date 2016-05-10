@@ -7,6 +7,7 @@
 //
 
 #import "ZCGLeftContentTableViewCell.h"
+#import "MITColorTools.h"
 
 #define WIDTH  self.frame.size.width
 #define HEIGHT self.frame.size.height
@@ -22,6 +23,7 @@
     self =  [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
         self.cellStyle = style;
+       
         switch (style) {
             case ZCGLeftContentCellStyleSubtitle:{
                 self.nameLabel = [[UILabel alloc]init];
@@ -56,16 +58,17 @@
     }
     if (self.separateLineStyle == ZCGListViewSeparateLineStyleSingleLine) {
         separateLineView.frame = CGRectMake(0, HEIGHT-0.5, WIDTH, 0.5);
-        separateLineView.backgroundColor = [UIColor redColor];
+        separateLineView.backgroundColor = MIT_GRAY_COLOR;
     }
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     
     [super setSelected:selected animated:animated];
-//    UIView* bgView = [[UIView alloc]init];
-//    bgView.backgroundColor = [UIColor clearColor];
-//    self.selectedBackgroundView = bgView;
+     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    //    UIView* bgView = [[UIView alloc]init];
+    //    bgView.backgroundColor = [UIColor clearColor];
+    //    self.selectedBackgroundView = bgView;
     
 }
 - (void)setCellSeparatLineWidth:(CGFloat)width Color:(UIColor*)color {

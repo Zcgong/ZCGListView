@@ -1,8 +1,8 @@
 //
-//  QDListView.m
-//  StampApp
+//  ZCGListView.m
 //
-//  Created by LTMacMini on 15/11/16.
+//
+//  Created by zcgong.
 //
 //
 
@@ -11,10 +11,10 @@
 #import "ZCGRightContentTableViewCell.h"
 
 
-
 #define ContentWidth (_rightColumnWidth*_columns)
 #define DefaultFontSize 21
 #define DefaultTextColor [UIColor blackColor]
+#define DefaultSepColor  [UIColor colorWithRed:158/255.0f green:158/255.0f blue:158/255.0f alpha:1.0f]
 #define DefaultTextAlign NSTextAlignmentLeft
 #define DefaultSeparateWidth 1
 #define DefaultViewBGColor [UIColor clearColor]
@@ -35,15 +35,9 @@
     NSInteger cellTag;
     UIColor* tagCellBgColor;
 }
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _rightHeaderLabels = [NSMutableArray new];
-        self.columns = self.titleArr.count - 1;
-        [self initUI];
-    }
-    return self;
-}
+
+#pragma mark - Public Methods
+
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)titles listData:(NSMutableArray*)data{
     self = [super initWithFrame:frame];
     if (self) {
@@ -57,22 +51,47 @@
     return self;
 }
 
-- (void) initUI{
-    self.leftContentTableView = [[UITableView alloc]init];
-    self.leftContentTableView.dataSource = self;
-    self.leftContentTableView.delegate = self;
-    self.rightContentTableView = [[UITableView alloc]init];
-    self.rightContentTableView.dataSource = self;
-    self.rightContentTableView.delegate = self;
-    self.rightAllContentScrollView = [[UIScrollView alloc]init];
-    self.leftAllContentScrollView = [[UIScrollView alloc]init];
-    
-    [self addSubview:self.leftAllContentScrollView];
-    [self addSubview:self.rightAllContentScrollView];
-    
-    [self.rightAllContentScrollView addSubview:self.rightContentTableView];
-    [self.leftAllContentScrollView addSubview:self.leftContentTableView];
+- (void)listViewReloadData{
+    [self.leftContentTableView reloadData];
+    [self.rightContentTableView reloadData];
 }
+
+- (void)setSeparateLineWidth:(CGFloat)width Color:(UIColor*)color {
+    cellSeparateWidth = width;
+    cellSeparateColor = color;
+    if (self.separateLineStyle == ZCGListViewSeparateLineStyleAround) {
+        self.leftLabel.layer.borderWidth = width/2;
+        self.leftLabel.layer.borderColor = color.CGColor;
+        for (UILabel* label in _rightHeaderLabels) {
+            label.layer.borderWidth = width/2;
+            label.layer.borderColor = color.CGColor;
+        }
+    }
+    [self listViewReloadData];
+}
+
+- (void)listViewRightCell:(ZCGRightContentTableViewCell*)cell changeColumnColorWithTag:(NSInteger)tag color:(UIColor*)color {
+    cellTag = tag;
+    tagCellBgColor = color;
+    [self listViewReloadData];
+}
+
+-(ZCGRightContentTableViewCell *)rightContentTableViewCellAtIndexPath:(NSIndexPath *)indexPath{
+    return [self.rightContentTableView cellForRowAtIndexPath:indexPath];
+}
+
+#pragma mark - Override
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _rightHeaderLabels = [NSMutableArray new];
+        self.columns = self.titleArr.count - 1;
+        [self initUI];
+    }
+    return self;
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     //左侧内容表
@@ -121,8 +140,8 @@ static NSString* identifierR = @"rightCell";
     if ([tableView isEqual:self.leftContentTableView]) {
         ZCGLeftContentTableViewCell* cell = [[ZCGLeftContentTableViewCell alloc]initWithListCellStyle:self.leftCellStyle?self.leftCellStyle:ZCGLeftContentCellStyleDefault
                                                                                       reuseIdentifier:identifierL];
-        cell.nameLabel.text = obj.firstObject[0];
-        cell.subTitleLabel.text = obj.firstObject[1];
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@",[obj objectAtIndex:0]];
+        cell.subTitleLabel.text = [NSString stringWithFormat:@"%@",[obj objectAtIndex:1]];
         [self configeLeftCell:cell];
         return cell;
     }else if ([tableView isEqual:self.rightContentTableView]){
@@ -141,7 +160,7 @@ static NSString* identifierR = @"rightCell";
     } else {
         [self.leftContentTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
-    if ([self.delegate respondsToSelector:@selector(listView:didSelectCellAtIndexPath:)]) {
+    if ([self.listViewDelegate respondsToSelector:@selector(listView:didSelectCellAtIndexPath:)]) {
         [self.listViewDelegate listView:self didSelectCellAtIndexPath:indexPath];
     }
 }
@@ -149,7 +168,8 @@ static NSString* identifierR = @"rightCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.delegate respondsToSelector:@selector(listView:heightForRowIndexPath:)]) {
-        return [self.listViewDelegate listView:self heightForRowIndexPath:indexPath];
+        CGFloat i = [self.listViewDelegate listView:self heightForRowIndexPath:indexPath];
+        return i;
     }else{
         return 45;
     }
@@ -194,12 +214,11 @@ static NSString* identifierR = @"rightCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
     if ([scrollView isEqual:self.leftContentTableView]) {
         self.rightContentTableView.contentOffset = self.leftContentTableView.contentOffset;
-        NSLog(@"leftContentTableView %f",scrollView.contentOffset.y);
-    } else if ([scrollView isEqual:self.rightContentTableView]) {
+    }
+    else if ([scrollView isEqual:self.rightContentTableView]) {
         self.leftContentTableView.contentOffset = self.rightContentTableView.contentOffset;
-        NSLog(@"rightContentTableView %f",scrollView.contentOffset.y);
-    } else if ([scrollView isEqual:self.rightAllContentScrollView]){
-        NSLog(@"rightAllContentScrollView %f",scrollView.contentOffset.x);
+    }
+    else if ([scrollView isEqual:self.rightAllContentScrollView]){
         //!TODO 想在这里做一个渐隐的效果
         if (scrollView.contentOffset.x > 0) {
             
@@ -210,26 +229,27 @@ static NSString* identifierR = @"rightCell";
 
 #pragma mark
 #pragma mark - Private Methods
+
 - (void)tableviewFooterViewHidden{
     self.leftContentTableView.tableFooterView = [[UIView alloc]init];
     self.rightContentTableView.tableFooterView = [[UIView alloc]init];
 }
-- (void)listViewReloadData{
-    [self.leftContentTableView reloadData];
-    [self.rightContentTableView reloadData];
-}
-- (void)setSeparateLineWidth:(CGFloat)width Color:(UIColor*)color {
-    cellSeparateWidth = width;
-    cellSeparateColor = color;
-    if (self.separateLineStyle == ZCGListViewSeparateLineStyleAround) {
-        self.leftLabel.layer.borderWidth = width/2;
-        self.leftLabel.layer.borderColor = color.CGColor;
-        for (UILabel* label in _rightHeaderLabels) {
-            label.layer.borderWidth = width/2;
-            label.layer.borderColor = color.CGColor;
-        }
-    }
-    [self listViewReloadData];
+
+- (void) initUI{
+    self.leftContentTableView = [[UITableView alloc]init];
+    self.leftContentTableView.dataSource = self;
+    self.leftContentTableView.delegate = self;
+    self.rightContentTableView = [[UITableView alloc]init];
+    self.rightContentTableView.dataSource = self;
+    self.rightContentTableView.delegate = self;
+    self.rightAllContentScrollView = [[UIScrollView alloc]init];
+    self.leftAllContentScrollView = [[UIScrollView alloc]init];
+    
+    [self addSubview:self.leftAllContentScrollView];
+    [self addSubview:self.rightAllContentScrollView];
+    
+    [self.rightAllContentScrollView addSubview:self.rightContentTableView];
+    [self.leftAllContentScrollView addSubview:self.leftContentTableView];
 }
 
 - (void)configeLeftCell:(ZCGLeftContentTableViewCell*)cell {
@@ -246,14 +266,14 @@ static NSString* identifierR = @"rightCell";
     }
     cell.separateLineStyle = self.separateLineStyle?self.separateLineStyle:ZCGListViewSeparateLineStyleSingleLine;
     [cell setCellSeparatLineWidth:cellSeparateWidth?cellSeparateWidth:DefaultSeparateWidth
-                            Color:cellSeparateColor?cellSeparateColor:DefaultTextColor];
+                            Color:cellSeparateColor?cellSeparateColor:DefaultSepColor];
     [cell setSelectionStyle:_cellSelectionStyle?_cellSelectionStyle:DefaultSelectStyle];
 }
 
 - (void)configeRightCell:(ZCGRightContentTableViewCell*)cell {
     
     [cell setCellSeparatLineWidth:cellSeparateWidth?cellSeparateWidth:DefaultSeparateWidth
-                            Color:cellSeparateColor?cellSeparateColor:DefaultTextColor];
+                            Color:cellSeparateColor?cellSeparateColor:DefaultSepColor];
     [cell setCellTextAlignment:_rightTextAlign?_rightTextAlign:DefaultTextAlign];
     [cell setCellTextColor:_rightTextColor?_rightTextColor:DefaultTextColor];
     [cell setCellTextFontSize:_rightFontSize?_rightFontSize:DefaultFontSize];
@@ -263,11 +283,6 @@ static NSString* identifierR = @"rightCell";
     if (cellTag && tagCellBgColor) {
         [cell changeColumnColorWithTag:cellTag Color:tagCellBgColor];
     }
-}
-- (void)listViewRightCell:(ZCGRightContentTableViewCell*)cell changeColumnColorWithTag:(NSInteger)tag color:(UIColor*)color {
-    cellTag = tag;
-    tagCellBgColor = color;
-    [self listViewReloadData];
 }
 
 @end

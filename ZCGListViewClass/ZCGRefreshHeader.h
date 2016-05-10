@@ -22,6 +22,7 @@
 @property(nonatomic,copy) NSString *titlePullDown;
 @property(nonatomic,copy) NSString *titleRelease;
 @property (nonatomic, assign) BOOL isRefresh;
+
 /**
  *  header's init
  */

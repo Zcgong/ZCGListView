@@ -49,10 +49,11 @@
     headerLabel.textAlignment = NSTextAlignmentCenter;
     headerLabel.text=_titlePullDown;
     headerLabel.font=[UIFont systemFontOfSize:14];
-    
+    headerLabel.textColor = [UIColor lightGrayColor];
     headerImageView=[[UIImageView alloc] initWithFrame:CGRectMake((scrollWidth-labelWidth)/2-imageWidth, 0, imageWidth, imageHeight)];
     [headerView addSubview:headerImageView];
     headerImageView.image=[UIImage imageNamed:@"down"];
+    headerImageView.tintColor = [UIColor lightGrayColor];
     
     activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.frame=CGRectMake((scrollWidth-labelWidth)/2-imageWidth, 0, imageWidth, imageHeight);
@@ -84,6 +85,7 @@
         }else{
             currentPostion = _scrollView.rightContentTableView.contentOffset.y;
         }
+//         NSLog(@"%d ----- beginRefreshing",currentPostion);
         // 判断是否正在刷新  否则不做任何操作
         if (!_isRefresh) {
             [UIView animateWithDuration:0.3 animations:^{
@@ -127,6 +129,7 @@
         // 设置刷新状态_scrollView的位置
         [UIView animateWithDuration:0.3 animations:^{
             CGPoint point= _scrollView.contentOffset;
+//            NSLog(@"%@ ----- beginRefreshing",[NSValue valueWithCGPoint:point]);
             if (point.y>-headerHeight*1.5) {
                 _scrollView.contentOffset=CGPointMake(0, point.y-headerHeight*1.5);
             }
@@ -147,6 +150,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.3 animations:^{
             CGPoint point= _scrollView.contentOffset;
+//            NSLog(@"%@ ----- endRefreshing",[NSValue valueWithCGPoint:point]);
             if (point.y!=0) {
                 _scrollView.contentOffset = CGPointMake(0, point.y+headerHeight*1.5 + 64);
             }

@@ -1,8 +1,8 @@
 //
-//  QDListView.h
-//  StampApp
+//  ZCGListView.h
 //
-//  Created by LTMacMini on 15/11/16.
+//
+//  Created by zcgong.
 //
 //
 
@@ -67,5 +67,8 @@
 - (void)setSeparateLineWidth:(CGFloat)width Color:(UIColor*)color;
 
 - (void)listViewRightCell:(ZCGRightContentTableViewCell*)cell changeColumnColorWithTag:(NSInteger)tag color:(UIColor *)color;
+
+-(ZCGRightContentTableViewCell *)rightContentTableViewCellAtIndexPath:(NSIndexPath *)indexPath;
+
 
 @end

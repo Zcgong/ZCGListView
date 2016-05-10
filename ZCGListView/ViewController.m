@@ -7,12 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "ZCGRightContentTableViewCell.h"
-#import "ZCGLeftContentTableViewCell.h"
-#import "ZCGRefreshHeader.h"
+#import "ZCGListViewHeader.h"
 @interface ViewController ()<ZCGListViewDelegate>
 @property (nonatomic, strong) ZCGListView* listView;
 @property (nonatomic, strong) ZCGRefreshHeader* refreshHeader;
+@property (nonatomic, strong) NSMutableArray *data;
 @end
 
 @implementation ViewController
@@ -24,13 +23,20 @@
     self.navigationItem.rightBarButtonItem = bbt;
     UIBarButtonItem* bbt2 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(goToNext)];
     self.navigationItem.leftBarButtonItem = bbt2;
+    _data = [NSMutableArray arrayWithArray:@[
+                                             @[@[@"zcgong",@"000007"],@"52",@"222",@"555",@"125",@"152",@"12121"],
+                                             @[@[@"zcgong",@"000007"],@"23",@"222",@"555",@"125",@"152",@"12121"],
+                                             @[@[@"zcgong",@"000007"],@"14",@"222",@"555",@"125",@"152",@"12121"]
+                                             ]];
     _listView = [[ZCGListView alloc]initWithFrame:CGRectMake(0, 64,  self.view.frame.size.width,  self.view.frame.size.height)
                                            titles:@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"]
-                                         listData:@[@[@[@"zcgong",@"000007"],@"58",@"222",@"555",@"125",@"152",@"12121"],@[@[@"zcgong",@"000007"],@"58",@"222",@"555",@"125",@"152",@"12121"],@[@[@"zcgong",@"000007"],@"58",@"222",@"555",@"125",@"152",@"12121"]]];
+                                         listData:_data];
     _listView.listViewDelegate = self;
     _listView.rightColumnWidth = 150;
     _listView.leftColumnWidth = 100;
     _listView.headerViewheight = 50;
+    //! 这方法不能改变分割线的颜色  by Zcgong
+    [_listView setSeparateLineWidth:0.5 Color:[UIColor blackColor]];
     _refreshHeader = [[ZCGRefreshHeader alloc]init];
     _refreshHeader.scrollView = _listView;
     [_refreshHeader header];
@@ -57,7 +63,24 @@
     NSLog(@"didSelectCell:%ld",indexPath.row);
     
 }
-
+- (void)listView:(ZCGListView *)listView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //    NSArray* data = [_data objectAtIndex:indexPath.row];
+    //    if ([[data objectAtIndex:1] integerValue] < 20) {
+    //        NSLog(@"11111111111111111");
+    //        ZCGLeftContentTableViewCell* leftCell = [listView.leftContentTableView cellForRowAtIndexPath:indexPath];
+    //        [leftCell setCellTextColor:[UIColor greenColor]];
+    //        ZCGRightContentTableViewCell* rightCell = [listView.rightContentTableView cellForRowAtIndexPath:indexPath];
+    //        NSUInteger len = rightCell.contentView.subviews.count;
+    //        for (NSUInteger i = 0; i < len; i ++ ) {
+    //            UIView* view = rightCell.contentView.subviews[i];
+    //            if ([view isKindOfClass:[UILabel class]]) {
+    //                UILabel* lable = (UILabel*)view;
+    //                lable.textColor = [UIColor greenColor];
+    //            }
+    //        }
+    //    }
+    
+}
 - (CGFloat)listView:(ZCGListView *)listView heightForRowIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
